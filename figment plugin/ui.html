@@ -16,32 +16,52 @@
   margin-left: 0px;
   margin-right: 0px;
   margin-top: 0px;
-}
+  }
 
-.navbar {
-  position: sticky;
-}
+  .navbar {
+    position: sticky;
+  }
 
-hr {
-  padding-top: 0px;
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
+  hr {
+    padding-top: 0px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
 
-h2 {
-  font-size: 16px;
-  font-weight:500;
-  margin-bottom: 16px;
-}
+  h2 {
+    font-size: 16px;
+    font-weight:500;
+    margin-bottom: 16px;
+  }
 
-h4 {
-  margin-bottom: 10px;
-}
+  h4 {
+    margin-bottom: 10px;
+  }
 
-p {
-  font-size: 14px;
-  color: #676767;
-}
+  p {
+    font-size: 14px;
+    color: #676767;
+  }
+
+  .input-container {
+    font-size: 16px;
+    color: black;
+    background: #F7F4F8;
+    border-color: #F7F4F8;
+    border-style: solid;
+    border-radius: 5px; 
+    transition: 0.3s;
+    width: 100%;
+    margin-bottom:20px;
+    text-align: left;
+    visibility: hidden;
+  }
+
+  .input-text {
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
 .tab {
     /* overflow: hidden; */
@@ -88,6 +108,8 @@ p {
     border-top: none;
     margin-right: 12px;
     margin-left: 12px;
+    overflow: hidden;
+    position: relative;
   }
 
   .tabcontent {
@@ -130,6 +152,11 @@ p {
     border-width: 1.5px;
     color: #fff;
     padding: 8px;
+    margin-right: 8px;
+    position: relative;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
   }
 
   .primary-button:hover:enabled {
@@ -284,7 +311,7 @@ p {
   <h2>hi! &#128075 I'm figment, your new collaborative design partner. &#127912</h2>
   <div class="spacer-smaller"></div>
   <p>Tell me what you're designing... <input id="task" placeholder="a control panel for a spaceship"></p>
-  <button class="primary-button" id="create">start co-designing</button>
+  <button class="primary-button" id="homepage-button">start co-designing</button>
 </div>
 
 <div id="Tasks" class="tabcontent">
@@ -307,45 +334,49 @@ p {
     </div>
   </button>
 
+  <button class="cardlink" onclick="openTab(event, 'Paintbrush')">
+    <div class="card" id="paintbrushCard">
+      <div class="container">
+        <h4><b>Paintbrush</b></h4>
+        <p>I'll paint visual styles onto frames.</p>
+      </div>
+    </div>
+  </button>
+
 </div>
 
 <div id="Styles" class="tabcontent">
   <h4>Data viz</h4>
-  <p><img class="style-preview" src="https://lh3.googleusercontent.com/hcnenGh9Mdl0gxKZy546X2fJ-TutdFBpYtb35s_xzTg7H3LTgKia_EeZRRn8pqzluvodYBtWH0WIxIO8daaHhtcyZ3hEga7FbUaQNNrtKrYKHs0xk35JWzPjVlZaMpl4xdRkzuOn9fchadHaTjYh4zkNmgMJ_QLXGvN0IzGrJ9pjUTpMdCNF4gfgE3iScasMH1NWBdwsVkFwCayHe9959t25_DtSmRlizUkohZj-hu2N-_gAUeE9IpClHgrV2JLFWZL2FTbsgotv0ljD7TeCIxeXb5SeG5N06PVWRI1tk40AS47QNrpc1f8L_AvwW6PRagvplwWbeGahTdsq8rxPfprZHEcKMWNDLsRQPplzbrR_GgERnIGwLCPARDd6ZFtrOCincl_Zp6o7Ka3gxtSthGQmm7nHACZNwVJCHCP9UhCuQSh1MpbKHF0XhXcGdIeB5lmCDr5hJCoC0uUgqploS-x-ehkGHcfq5VfpPOK41oIuvwaYspzYb_ZgFh16nIq5CnKICDx1kia0_pBFbubaDZLRCN4CLn5NfOp-T-_HICHiV6WaUmEQ7yzwkaf95uNKNXjbX0--1gs6CULFGNnqxdH4bDEVvRYix0W-UyF88yB2-qmmKh0ENpXh_vKKgZbtrI3wxH8lZvvtL7lv70RzBtodxc6VeAPBcZO7uIaJSjVxZk5eIy6e_k3vcKA9fwzZVssUtRhsWVPlDtpUpGjqI13Gz8leyxeZa7VTiQq1bwmy0XmakzXe_kYtpWcTo78s04e4UfWDKfvZueCDqhJebfEmjaYB76HKEiTKCOhou-V_UGMIMDzZpNCOUrldhVzrBbuAzabCyjL_FlC1RzCPMTNOZF8euSs6y3rNnTdjIu3RUUfPFO8YWNQRvfX85bXpozjnhy5YnBR9GYCmK4LWb5XeFlOBGs-Mhf73mMehItim047uzw=w2352-h1428-no?authuser=0" alt="Data viz images"></p>
-  <button class="secondary-button">apply</button>
-  <button class="primary-button">generate</button>
+  <p><img class="style-preview" src="https://i.imgur.com/ecHqFZ2.png" alt="Data viz images"></p>
+  <button class="primary-button" id="generate">generate</button>
   <div class="spacer"></div>
   <hr size="1" width="100%" color="#e5e5e5">  
   <div class="spacer-smaller"></div>
   
   <h4>Keith Haring</h4>
-  <p><img class="style-preview" src="https://lh3.googleusercontent.com/hHwiwKWhK3EBB-e7quiT1dJNQ-RW1Y8_EUyLZP3YokZlTTdffGAirzKuq8wRh7tO0fRYvJQcZHwfr_ef0k4250P8HY1VxuGtmoNV8zHe5tTSu9x5zUgGy_UAAeSnFsZXtboiwFDZefGKtNrzEe_1qUgDjoJi_NjiCf7RWidUaYEoxsi18fUDphUk1mUmjRBxtnlt0XzSs7XBsstvq_HQMdF0bax6eRkiV1h_Q4c4-bh4dT3HZ_S2wlmI4yQjEc9K3aTzZpaLefiULHSGNxUZ2ciiqCCMegHve-Ncg_d3LcCQixkQsktsftgIq4IzfLnCT0pQqhi6G_6_IbR5IuOCMNJWg7UxpTToBy1wcF6WHT2whVUz2FK9gMJEkAF595mjum-Y3F_-v_2H2lSHPbZlwce2iMcnDc3Grgk0J-UzZgKaIBkhjg6-76bMMP57RVM97brMG77Qtmfd38jYiA7GTB3cGQaZ6fBjao8rXaHaO9J8A1gCQn5ILIEnMxAJ48WYcy4JzztfU6Ja-EBXjnMIHTaplqdnsWgLeiBRKd6JMlBGulc1QbuVBLxuTO6IIz22X6vRpx7wA3K_bw2XeVHwqrrvFN2UnLc__55cMkX7CJgO8eqilAvRR06QEPoJBo1LXeFeWhzPsgMP1_ZqNpsh-J_5KuNuBGmr3HkHSiuU2DBpjlvpQVS0O28wxftZ6YOy5km53fBOfw1oKT5L9m_SjlPZ25K66YrVjtz3-I0lhB5sfDI4f3VG47ZZ_copp0MAo_m_Dzzo7YdbooPnlrD-QXc9xryLTV-Mt_so8J9vwHi-LKpxUGXvgsgnk5DeyFbkO0-A6Te72pZbEgOQ8OV0QuQ0UVv2tqEA7DK-XafCTlwWu9D9NXnFdTLDM3oJ87yOUYto73ljkLTOBMR-TNCHuU7eS6Y8LPCM0x7sMuIh89hBWSca9A=w554-h346-no?authuser=0" alt="Keith Haring images"></p>
-  <button class="secondary-button">apply</button>
-  <button class="primary-button">generate</button>
+  <p><img class="style-preview" src="https://i.imgur.com/Q874Irw.png" alt="Keith Haring images"></p>
+  <button class="primary-button" id="generate">generate</button>
   <div class="spacer"></div>
   <hr size="1" width="100%" color="#e5e5e5">  
   <div class="spacer-smaller"></div>
   
   <h4>New Yorker</h4>
-  <p><img class="style-preview" src="https://lh3.googleusercontent.com/m-UVoB3WY1x2rtxMjNBQp4T_HZkxfuhNj2ukdUnhdM7Ft5FJNbODIbA1_jmwizrwS3SNViEZK4I0UG40iGiw3NMjuzRYl30pyj4jifUSKoTNDjvxsB8LP2-e9-58fmJsQ7Kyc_bg1uhD5zctjo7R202LxLCdavZYvJ_uMAeGFw-A9OzVQ3BIxzy0dDjfeRnTGhuzJO-bC--cyFEOrAHTXw6V-zIGnlLSrCNPwcQebp6j1T3ff7hG0Js_YeGnmdLoWx8Np1WwgdW75RAzh8HO2ak4OFwyIjGgZvHc-3n9kmANIrQD_PTgrv0YUTLrKuOCiqQRyQuGco-2sxhfYJ74hQU-sF-h_hZvyN4Q1orpsDbTbkuXpxQilzH5ziLhX3xqzVDZhJLAXWwvo2Q3hIrWxpiPfBwvURSYEZ5U38y4XgQ09k_fYAZlEHhVzhYjgGJMmaC_o8ScQYHKwQS8A7__XIAqHDGyc1SlC9vh9dRZM8KXhhnLjfoQC0TUG3XNhdUVMRW2baclt_IpKPCwsn0Z6LWzRDbFYByLFdtpyRjoVq_pbkFSJSR8dHEbrfqDlBiszzgY9-Bk8_6OK8y7zg0YyRIPqlh77jB4gfKSJv34xsu9JIVtPtFZqC9IdkmlCZOWBiKsyOOc11-QQcrSAc7XQuT3lNK2xjWpNfewlDuRN6Bdn6eTK0RGUH2M16OGzlBEgp2jUaidi-owjhnpE25gR7lk4mFNl4DX4DwTsDrU82wM5B7nZwdGgo2fCFrlE_DYoL4rcQ6aCQllFKKYYeOVKxIh_k3i050cyqaWd-PAZ43Qh4r4ecFK0XSej3qqNR5sVc1FmgSyu1YN3ybNhWMY4vK28nHuha9krNGcXNo7Tln9dSfAi1AOg7gDeCRdLIN4jCJqPEAGrUe-vJp4kBED7o8x4lP6nMpLi1mIZ2_bo4bsNdpeUA=w1214-h764-no?authuser=0" alt="New Yorker magazine covers"></p>
-  <button class="secondary-button">apply</button>
-  <button class="primary-button">generate</button>
+  <p><img class="style-preview" src="https://i.imgur.com/IgIZEvI.png" alt="New Yorker magazine covers"></p>
+  <button class="primary-button" id="generate">generate</button>
   <div class="spacer"></div>
   <hr size="1" width="100%" color="#e5e5e5">  
   <div class="spacer-smaller"></div>
   
   <h4>Orange Sky</h4>
-  <p><img class="style-preview" src="https://lh3.googleusercontent.com/sKT_SFXnfRFDRmGjK31UIx4rt_gFLuKNJfmB_TM8QvbwHPBLETzxJm0eJhohL_EoBvNdWCwcFi2ANz_Zc7TfXKYGi_PCNMMlgVnRbZ9iUavDqDa0iFvp6eT0709GIwIlmWkKoz8KhqWFbeL08VMIOWjEStYPRrqMXIP2lkta5kgF2HoBRQ8EHdF9BWU6pFBpmIYertD3XE3R7SAZAcWJRAfKXXkfZboe1CDcdNiwZCQT84UCSx_wsLGlDgjOgCi1aDFLyCY-CGCx20v9xaLv6JaXNi171GR_kEgbJB7PYVZaq437C7f9IyetFbnR-YAgRr_Yh0pMDHkpJ9qNI_Tqf8FG7CqE4EVQdjJaYU2Ax7TC9FnH4ixSz8LBF8d-TuL7gWJJDOwGKnQRQDkw-2LT-EcGLALrv4jiyNP4vJ9ONJ_cJbP2WQGWROC4q7swAlqeORUES_LTXdSbbZ_Ks3oI24qukCC5W7npg4pwQCvy6dz2_z5qBBat5ayRWl1wvePTHB0WeNJOHCpl0TCrdumbbkFVpRFIVB1uTaWQASsvaGGPyfE0Qa0lVvfpjs_Eqh6CfWmK2eT7Llyz9HVtDec7ASKwge7a4BRdlf6b3JmCOAcTznp0uu4pVetxaVCQEpGjDlg5rPxhWHS2eJkEqIFCKkkhnKaLLySo16gjqQTW9NSTa6jMnBgFIj43MjacsSGDKY4GzaLsmbMkn-ZDWDr_CV309ZkxA9q9-pGuF5FVFkjuowbNE1yz39Vk0JUL7W8fKURHK7_YEmmj-cY7t11r2tjkw5OmhIlztFiaPBpmzZSBiQmGjdNT6SnoTbNlqPdCBMcF8hu5itr4RYRChkPonPqNZdgDeBgga2G6F8eVC8R_Jw46iVcUiec-968_1OdfpmvnpnbzARUjgs5p-xcY_bJ858NCbL1LSFa_0jVJQuyQbQn3AQ=w1176-h766-no?authuser=0" alt="Orange skies"></p>
-  <button class="secondary-button">apply</button>
-  <button class="primary-button">generate</button>
+  <p><img class="style-preview" src="https://i.imgur.com/FJ9FSNP.png" alt="Orange skies"></p>
+  <button class="primary-button" id="generate">generate</button>
   <div class="spacer"></div>
   <hr size="1" width="100%" color="#e5e5e5">  
   <div class="spacer-smaller"></div>
   
   <h4>Sneakers</h4>
-  <p><img class="style-preview" src="https://lh3.googleusercontent.com/hrHLD2g7TWP94EdKh5kxZ6w4W2y0y-bF6RbnLtAGlLVn3ohHpsgwoJqgJSzX9AH8tHr4NFvAjFba7CGRVorrA04kNM9nquc3rqFeaz7u1luM1s1iC1yz_Nf1oPfc1Qq-ClifRzXbscS1_ynJaAJ8fK3dhG_0tuBgesSjd_-gHN9ysGRz_7ZBYqm6EACJMl9241XLKUROrfdUN3Xk27ZN8107LigO4i4lqe4kXp_XvpdQoG3bRtMC3HAijYW7cpp_-JSkXLaIe_Vkp_z_p5f_BmWMEBqDVqI2cAW6uMlFDTXBbgxIYFKLqaYCDYR0V8RvpVoGF7IBR5gqRIhBuqxjYAZaqP-GRwtZLvTKd-WsE9rjeXaP-XtvEDCl0Qe31Pcc8ihwugyWRjQliVRAg3jeY1IpUjrNmLfDk5r5PjWterpUw2WETiCp1VC2noAGPFhexcbb9Zbl3juS-3EsrZjBEoe1PU3u8YvUFEL74ogRjHuy2CUcHgEDZe3Nx0im0yWf6X83tUP_8hfAV6H0BJvxst6iUK1tVKOcme9OaGY1zszH1SBqUh1SSVORob4cC2kSMm0IWRVcVHAnJIidHB0oRy-9L2ScHGM0tch7QWofWFom5fooboviJnnTevP94Hp7qUuOm5AV23tV6P6YZ28kvXxOKJP5S9dnpqT8QX6Hgi1peFf-f1ws5gweJznbw0BF6GqE9ly_BMddrVSkaOypoLdF_QygW-iQvdIwrF3gEwcy0kpg3Fw6dZDRZCWEZ1yzdVJxKUZ99F6ZBl280lRANpPrPlteWdR5z43RnpTnoa655rrXOC2G0i_2FRiK0he-p_8TAHA6CM6wJsP-XdH8nZE5Djl2NLpXIK8F0HbY8QVPsjMegwGja5IwMj-JgVU6aY-ZeeEOERS5sBGk8GBEDl4D-00t5dz_7xsT-V125CH9AvBthg=w956-h574-no?authuser=0" alt="Sneakers"></p>
-  <button class="secondary-button">apply</button>
-  <button class="primary-button">generate</button>
+  <p><img class="style-preview" src="https://i.imgur.com/BH3NExb.png" alt="Sneakers"></p>
+  <button class="primary-button" id="generate">generate</button>
   <div class="spacer"></div>
   <hr size="1" width="100%" color="#e5e5e5">  
   <div class="spacer-smaller"></div>
@@ -355,13 +386,19 @@ p {
   <h4>Ideate</h4>
   <p>Select an object containing text to begin.</p>
   <div class="spacer-smaller"></div>
-  <button class="primary-button" disabled>go!</button>
+  <button class="primary-button" id="ideate-button" disabled>go!</button>
 </div>
 <div id="Moodboard" class="tabcontent">
   <h4>Moodboard</h4>
   <p>What do you want to see?</p>
   <input id="task" placeholder="what serendipity looks like"></p>
-  <button class="primary-button" disabled>go!</button>
+  <button class="primary-button" id="moodboard-button">go!</button>
+</div>
+<div id="Paintbrush" class="tabcontent">
+  <h4>Paintbrush</h4>
+  <p>Select the frame or image you want to use as the style and click "set style" to confirm </p>
+  <button class="primary-button" id="set-style-button" disabled>set style</button>
+  <div class = "spacer-smaller" id="last-element-paintbrush"></div>
 </div>
 
 </body>
@@ -369,6 +406,10 @@ p {
 
 <!-- ––––––––––––––––––––––––––––––––––––––––– JAVASCRIPT SECTION ––––––––––––––––––––––––––––––––––––––––––––– -->
 <script>
+  // GLOBAL VARIABLES –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+  var style_set = false;
+
+  // TAB STUFF –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
   function openTab(evt, tabName) {
   // Declare all variables
   var i, tabcontent, tablinks;
@@ -393,11 +434,109 @@ p {
   // Get the element with id="defaultOpen" and click on it
   document.getElementById("defaultOpen").click();
 
-  document.getElementById('create').onclick = () => {
-    const textbox = document.getElementById('task');
-    const count = parseInt(textbox.value, 10);
-    parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
+  // MESSAGES ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+  
+
+  window.onmessage = async (event) => {
+    if (event.data.pluginMessage.type === 'none-selected') {
+      document.getElementById("set-style-button").disabled = true;
+      document.getElementById("ideate-button").disabled = true;
+      const ideate_element = document.getElementById("ideate-input-container");
+      const paintbrush_element = document.getElementById("paintbrush-input-container");
+      if (typeof(ideate_element) != 'undefined' && ideate_element != null){
+        ideate_element.remove();
+      }
+      if (typeof(paintbrush_element) != 'undefined' && paintbrush_element != null && style_set === false){
+        paintbrush_element.remove();
+      }
+
+      // document.getElementById("ideate-input-container").style.visibility = "hidden";
+    }
+    if (event.data.pluginMessage.type === 'text-selected') {
+      document.getElementById("ideate-button").disabled = false;
+      let parentNode = document.getElementById("Ideate");
+      let refNode = document.getElementById("ideate-button");
+      const newDiv = document.createElement("div");
+      newDiv.className = "input-container";
+      newDiv.id = "ideate-input-container";
+      newDiv.style.visibility = "visible";
+      const newPara = document.createElement("p");
+      newPara.innerHTML = event.data.pluginMessage.selected_text;
+      newPara.className = "input-text";
+      newDiv.appendChild(newPara);
+      parentNode.insertBefore(newDiv,refNode);
+      console.log("got this from the plugin code", event.data.pluginMessage);
+    }
+    if (event.data.pluginMessage.type === 'image-selected') {
+      document.getElementById("set-style-button").disabled = false;
+      const selected_image = event.data.pluginMessage.selected_image;
+      let parentNode = document.getElementById("Paintbrush");
+      let refNode = document.getElementById("set-style-button");
+      const newDiv = document.createElement("div");
+      newDiv.className = "input-container";
+      newDiv.id = "paintbrush-input-container";
+      newDiv.style.visibility = "visible";
+      const newPara = document.createElement("p");
+      newPara.innerHTML = selected_image;
+      newPara.className = "input-text";
+      newDiv.appendChild(newPara);
+      parentNode.insertBefore(newDiv,refNode);
+      console.log("got this from the plugin code", selected_image);
+    }
   }
+
+  // document.getElementById('homepage-button').onclick = () => {
+  //   const count = 1;
+  //   parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
+  // }
+
+  document.getElementById('homepage-button').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'placeholder-frame'} }, '*')
+  }
+
+  document.getElementById('moodboard-button').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'placeholder-frame'} }, '*')
+  }
+
+  document.getElementById('generate').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'placeholder-frame'} }, '*')
+  }
+
+  document.getElementById('ideate-button').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'placeholder-text'} }, '*')
+  }
+
+  document.getElementById('set-style-button').onclick = () => {
+    style_set = true;
+    parent.postMessage({ pluginMessage: { type: 'set-style'} }, '*')
+    let parentNode = document.getElementById("Paintbrush");
+    let refNode = document.getElementById("last-element-paintbrush");
+    const newSpacer = document.createElement("div");
+    newSpacer.className = "spacer";
+    const newPara = document.createElement("p");
+    newPara.innerHTML = "Select the frame or image to apply the style to";
+    const newDiv = document.createElement("div");
+    const newButton = document.createElement("button");
+    newButton.className = "primary-button";
+    newButton.id = "apply-style-button";
+    newButton.innerHTML = "Apply";
+    newButton.disabled = true;
+    const newButton2 = document.createElement("button");
+    newButton2.className = "secondary-button";
+    newButton2.id = "stat-over-button";
+    newButton2.innerHTML = "Start over";
+    newDiv.appendChild(newSpacer);
+    newDiv.appendChild(newPara);
+    newDiv.appendChild(newButton);
+    newDiv.appendChild(newButton2);
+    parentNode.insertBefore(newDiv, refNode);
+  }
+
+  // document.getElementById('ideate').onclick = () => {
+  //   const textbox = document.getElementById('task');
+  //   const count = parseInt(textbox.value, 10);
+  //   parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
+  // }
 
   document.getElementById('cancel').onclick = () => {
     parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
