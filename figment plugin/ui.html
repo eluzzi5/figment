@@ -397,7 +397,16 @@
 <div id="Paintbrush" class="tabcontent">
   <h4>Paintbrush</h4>
   <p>Select the frame or image you want to use as the style and click "set style" to confirm </p>
+  <!-- <div class="input-container" id="paintbrush-input-container" style="visibility:hidden">
+    <p class="input-text" id="style-name"></p>
+  </div> -->
   <button class="primary-button" id="set-style-button" disabled>set style</button>
+  <div id="paintbrush-target" style="visibility: hidden">
+    <div class="spacer"></div>
+    <p>Select the frame or image to apply the style to.</p>
+    <button class="primary-button" id="apply-style-button">Apply style</button>
+    <button class="secondary-button" id="start-over-button">Start over</button>
+  </div>
   <div class = "spacer-smaller" id="last-element-paintbrush"></div>
 </div>
 
@@ -407,9 +416,19 @@
 <!-- ––––––––––––––––––––––––––––––––––––––––– JAVASCRIPT SECTION ––––––––––––––––––––––––––––––––––––––––––––– -->
 <script>
   // GLOBAL VARIABLES –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-  var style_set = false;
+  var style_applied = false;
+  var style_selected = false;
+  var somethingSelected = false;
+  var inputCount = 0;
+  var currTab = 'Home';
 
-  // TAB STUFF –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+  // FUNCTIONS –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+  document.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        removeInputs();
+    }
+  });
+  
   function openTab(evt, tabName) {
   // Declare all variables
   var i, tabcontent, tablinks;
@@ -429,66 +448,136 @@
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
+
+  currTab = tabName;
+  // console.log(currTab);
 }
 
   // Get the element with id="defaultOpen" and click on it
   document.getElementById("defaultOpen").click();
 
-  // MESSAGES ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+  function removeInputs(){
+    var elements = document.getElementsByClassName("input-container");
+      for (var i = 0, length = elements.length; i < length; i++) {
+        elements[i].remove();
+      };
+
+      for (var i=0; i < 10; i++){
+        let ideate_element = document.getElementById("ideate-input-container");
+        let paintbrush_element = document.getElementById("paintbrush-input-container");
+
+        if (typeof(ideate_element) != 'undefined' && ideate_element != null){    
+          ideate_element.remove();
+        }
+        if (typeof(paintbrush_element) != 'undefined' && paintbrush_element != null && style_applied === false){
+          paintbrush_element.remove();
+        }
+      }
+
+  }
   
+  function removeByID(){
+    for (var i=0; i <= inputCount; i++){
+      let toRemove = document.getElementById(i);
+      toRemove.remove();
+    }
+    inputCount = 0;
+  }
+
+  // MESSAGES ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
   window.onmessage = async (event) => {
     if (event.data.pluginMessage.type === 'none-selected') {
+     if (style_selected === false){
+      removeInputs();
+     }
+      somethingSelected = false;
+      style_selected = false;
       document.getElementById("set-style-button").disabled = true;
       document.getElementById("ideate-button").disabled = true;
-      const ideate_element = document.getElementById("ideate-input-container");
-      const paintbrush_element = document.getElementById("paintbrush-input-container");
-      if (typeof(ideate_element) != 'undefined' && ideate_element != null){
-        ideate_element.remove();
-      }
-      if (typeof(paintbrush_element) != 'undefined' && paintbrush_element != null && style_set === false){
-        paintbrush_element.remove();
-      }
+      removeInputs();
+      // removeByID();
 
+      // let ideate_element = document.getElementById("ideate-input-container");
+      // let paintbrush_element = document.getElementById("paintbrush-input-container");
+      // if (typeof(ideate_element) != 'undefined' && ideate_element != null){
+      //   ideate_element.remove();
+      // }
+      // if (typeof(paintbrush_element) != 'undefined' && paintbrush_element != null && style_set === false){
+      //   paintbrush_element.remove();
+      // }
       // document.getElementById("ideate-input-container").style.visibility = "hidden";
     }
     if (event.data.pluginMessage.type === 'text-selected') {
+      somethingSelected = true;
       document.getElementById("ideate-button").disabled = false;
+      const styleName = event.data.pluginMessage.selected_text;
+      // document.getElementById("style-name").innerHTML = styleName;
+      // document.getElementById("paintbrush-input-container").style = "visibility: visible";
       let parentNode = document.getElementById("Ideate");
       let refNode = document.getElementById("ideate-button");
       const newDiv = document.createElement("div");
       newDiv.className = "input-container";
+      newDiv.setAttribute("id",inputCount)
       newDiv.id = "ideate-input-container";
       newDiv.style.visibility = "visible";
       const newPara = document.createElement("p");
-      newPara.innerHTML = event.data.pluginMessage.selected_text;
+      newPara.innerHTML = styleName;
       newPara.className = "input-text";
       newDiv.appendChild(newPara);
       parentNode.insertBefore(newDiv,refNode);
+      inputCount++;
       console.log("got this from the plugin code", event.data.pluginMessage);
     }
+
     if (event.data.pluginMessage.type === 'image-selected') {
-      document.getElementById("set-style-button").disabled = false;
+      somethingSelected = true;
       const selected_image = event.data.pluginMessage.selected_image;
-      let parentNode = document.getElementById("Paintbrush");
-      let refNode = document.getElementById("set-style-button");
-      const newDiv = document.createElement("div");
-      newDiv.className = "input-container";
-      newDiv.id = "paintbrush-input-container";
-      newDiv.style.visibility = "visible";
-      const newPara = document.createElement("p");
-      newPara.innerHTML = selected_image;
-      newPara.className = "input-text";
-      newDiv.appendChild(newPara);
-      parentNode.insertBefore(newDiv,refNode);
       console.log("got this from the plugin code", selected_image);
-    }
+
+      if (currTab === 'Paintbrush'){
+
+        if (style_selected === true && style_applied === false){
+        removeInputs();
+        style_selected = false;
+        }
+
+        if (style_applied === false){
+          document.getElementById("set-style-button").disabled = false;
+          let parentNode = document.getElementById("Paintbrush");
+          let refNode = document.getElementById("set-style-button");
+          const newDiv = document.createElement("div");
+          newDiv.className = "input-container";
+          newDiv.setAttribute("id",inputCount);
+          newDiv.id = "paintbrush-input-container";
+          newDiv.style.visibility = "visible";
+          const newPara = document.createElement("p");
+          newPara.innerHTML = selected_image;
+          newPara.className = "input-text";
+          newDiv.appendChild(newPara);
+          parentNode.insertBefore(newDiv,refNode);
+          style_selected = true;
+        }
+        else if (style_applied === true){
+          document.getElementById("apply-style-button").disabled = false;
+          let parentNode = document.getElementById("paintbrush-target");
+          let refNode = document.getElementById("apply-style-button");
+          const newDiv = document.createElement("div");
+          newDiv.className = "input-container";
+          newDiv.id = "paintbrush-target-input-container";
+          newDiv.style.visibility = "visible";
+          const newPara = document.createElement("p");
+          newPara.innerHTML = selected_image;
+          newPara.className = "input-text";
+          newDiv.appendChild(newPara);
+          parentNode.insertBefore(newDiv,refNode);
+          document.getElementById("apply-style-button").scrollIntoView();
+        }
+       }
+      } 
   }
 
-  // document.getElementById('homepage-button').onclick = () => {
-  //   const count = 1;
-  //   parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
-  // }
+  // OTHER ACTIONS ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
   document.getElementById('homepage-button').onclick = () => {
     parent.postMessage({ pluginMessage: { type: 'placeholder-frame'} }, '*')
@@ -504,42 +593,32 @@
 
   document.getElementById('ideate-button').onclick = () => {
     parent.postMessage({ pluginMessage: { type: 'placeholder-text'} }, '*')
+    removeInputs();
   }
 
   document.getElementById('set-style-button').onclick = () => {
-    style_set = true;
+    style_applied = true;
+    document.getElementById("set-style-button").disabled = true;
+    document.getElementById("paintbrush-target").style = "visibility: visible";
     parent.postMessage({ pluginMessage: { type: 'set-style'} }, '*')
-    let parentNode = document.getElementById("Paintbrush");
-    let refNode = document.getElementById("last-element-paintbrush");
-    const newSpacer = document.createElement("div");
-    newSpacer.className = "spacer";
-    const newPara = document.createElement("p");
-    newPara.innerHTML = "Select the frame or image to apply the style to";
-    const newDiv = document.createElement("div");
-    const newButton = document.createElement("button");
-    newButton.className = "primary-button";
-    newButton.id = "apply-style-button";
-    newButton.innerHTML = "Apply";
-    newButton.disabled = true;
-    const newButton2 = document.createElement("button");
-    newButton2.className = "secondary-button";
-    newButton2.id = "stat-over-button";
-    newButton2.innerHTML = "Start over";
-    newDiv.appendChild(newSpacer);
-    newDiv.appendChild(newPara);
-    newDiv.appendChild(newButton);
-    newDiv.appendChild(newButton2);
-    parentNode.insertBefore(newDiv, refNode);
   }
 
-  // document.getElementById('ideate').onclick = () => {
-  //   const textbox = document.getElementById('task');
-  //   const count = parseInt(textbox.value, 10);
-  //   parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
-  // }
+  document.getElementById("apply-style-button").onclick = () => {
+    document.getElementById("apply-style-button").disabled = true;
+    document.getElementById("paintbrush-target").style = "visibility: hidden";
+    document.getElementById("Paintbrush").scrollIntoView();
+    parent.postMessage({ pluginMessage: { type: 'placeholder-frame'} }, '*');
+    removeInputs();
+    style_applied = false;
+    style_selected = false;
+  }
 
-  document.getElementById('cancel').onclick = () => {
-    parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
+  document.getElementById("start-over-button").onclick = () => {
+    style_applied = false;
+    style_selected = false;
+    document.getElementById("paintbrush-target").style = "visibility: hidden";
+    document.getElementById("Paintbrush").scrollIntoView();
+    removeInputs();
   }
 
   // When the user scrolls the page, execute myFunction
@@ -552,14 +631,59 @@
   var sticky = navbar.offsetTop;
 
   // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-  function myFunction() {
-    if (window.pageYOffset >= sticky) {
-      navbar.classList.add("sticky")
-    } else {
-      navbar.classList.remove("sticky");
-    }
-  }
+  // function myFunction() {
+  //   if (window.pageYOffset >= sticky) {
+  //     navbar.classList.add("sticky")
+  //   } else {
+  //     navbar.classList.remove("sticky");
+  //   }
+  // }
 </script>
 <!-- ––––––––––––––––––––––––––––––––––––––––– JAVASCRIPT SECTION ––––––––––––––––––––––––––––––––––––––––––––– -->
 
+<!--misc
+
+// document.getElementById('homepage-button').onclick = () => {
+//   const count = 1;
+//   parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
+// }
+
+// document.getElementById('ideate').onclick = () => {
+//   const textbox = document.getElementById('task');
+//   const count = parseInt(textbox.value, 10);
+//   parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
+// }
+
+// document.getElementById('cancel').onclick = () => {
+//   parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
+// }
+
+
+// let parentNode = document.getElementById("Paintbrush");
+// let refNode = document.getElementById("last-element-paintbrush");
+// const newDiv = document.createElement("div");
+// newDiv.id = "paintbrush-target";
+// const newSpacer = document.createElement("div");
+// newSpacer.className = "spacer";
+// const newPara = document.createElement("p");
+// newPara.innerHTML = "Select the frame or image to apply the style to";
+// const newButton = document.createElement("button");
+// newButton.className = "primary-button";
+// newButton.id = "apply-style-button";
+// newButton.innerHTML = "Apply";
+// newButton.disabled = true;
+// const newButton2 = document.createElement("button");
+// newButton2.className = "secondary-button";
+// newButton2.id = "stat-over-button";
+// newButton2.innerHTML = "Start over";
+// newDiv.appendChild(newSpacer);
+// newDiv.appendChild(newPara);
+// newDiv.appendChild(newButton);
+// newDiv.appendChild(newButton2);
+// parentNode.insertBefore(newDiv, refNode);
+-->
+
 </html>
+
+
+

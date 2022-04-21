@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
+
+<!-- ––––––––––––––––––––––––––––––––––––––––– STYLE SECTION ––––––––––––––––––––––––––––––––––––––––––––– -->
+<style>
+/* Style the tab */
+
+* {
+  font-family: 'Roboto', sans-serif;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  }
+
+  .navbar {
+    position: sticky;
+  }
+
+  hr {
+    padding-top: 0px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight:500;
+    margin-bottom: 16px;
+  }
+
+  h4 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #676767;
+  }
+
+  .input-container {
+    font-size: 16px;
+    color: black;
+    background: #F7F4F8;
+    border-color: #F7F4F8;
+    border-style: solid;
+    border-radius: 5px; 
+    transition: 0.3s;
+    width: 100%;
+    margin-bottom:20px;
+    text-align: left;
+    visibility: hidden;
+  }
+
+  .input-text {
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+.tab {
+    /* overflow: hidden; */
+    background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+    padding: 0px;
+    margin: 0px;
+    z-index: 1;
+  }
+  
+  /* Style the buttons that are used to open the tab content */
+  .tab button {
+    background-color: #fff;
+    color: #b2b2b2;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 16px 16px 16px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    transition: 0.3s;
+    width: 33.3%
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    font-weight: bold;
+    color:black;
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    margin-right: 12px;
+    margin-left: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .tabcontent {
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+  }
+  
+  /* Go from zero to full opacity */
+  @keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  .cardlink {
+    background: #F7F4F8;
+    border-color: #F7F4F8;
+    border-style: solid;
+    border-radius: 5px; 
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .cardlink:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+
+  /* Add some padding inside the card container */
+  .container {
+    padding: 20px 16px 10px;
+  }
+
+  .primary-button {
+    background: #8918ED;
+    border-color: #8918ED;
+    border-style: solid;
+    border-radius: 5px; 
+    border-width: 1.5px;
+    color: #fff;
+    padding: 8px;
+    margin-right: 8px;
+    position: relative;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+
+  .primary-button:hover:enabled {
+    background: #5F11A5;
+    border-color: #5F11A5;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1.5px; 
+    color: #fff;
+    padding: 8px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+
+  .primary-button:disabled {
+    background: #E0DAE5;
+    border-color: #E0DAE5;
+    border-style: solid;
+    border-radius: 5px; 
+    border-width: 1.5px;
+    color: #F6F2FA;
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  .primary-button:disabled:hover {
+    cursor: default;
+  }
+
+  .secondary-button {
+    background: #fff;
+    border-color: #8918ED;
+    border-width: 1.5px;
+    border-style: solid;
+    border-radius: 5px; 
+    color: #8918ED;
+    padding: 8px;
+  }
+
+  .secondary-button:hover:enabled {
+    background: #fff;
+    border-color: #5F11A5;
+    border-width: 1.5px;
+    border-style: solid;
+    border-radius: 5px; 
+    color: #5F11A5;
+    padding: 8px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+
+  .secondary-button:disabled {
+    background: #fff;
+    border-color: #E0DAE5;
+    border-width: 1.5px;
+    border-style: solid;
+    border-radius: 5px; 
+    color: #E0DAE5;
+    padding: 8px;
+  }
+
+  .secondary-button:disabled:hover{
+    cursor: default;
+  }
+
+  .sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  }
+
+  .content {
+    padding: 16px;
+  }
+
+  .spacer {
+    width: 100%;
+    height: 21px;
+  }
+
+  .spacer-smaller {
+    width: 100%;
+    height: 10px;
+  }
+
+  /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+  .sticky + .content {
+    padding-top: 102px;
+  }
+
+  input {
+    width: 100%;
+    padding: 16px 12px 16px;
+    margin: 12px 0px 12px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    border-color: #676767;
+    border-width: 1px;
+  }
+
+  input:focus {
+    border: 1px solid #E3DCE7;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 12px 20px;
+    /* box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px; */
+    background-color: #f8f8f8;
+    resize: none;
+    width: auto;
+  }
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #B2B2B2;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: #B2B2B2;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: #B2B2B2;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: #B2B2B2;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+</style>
+<!-- ––––––––––––––––––––––––––––––––––––––––– STYLE SECTION ––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<!-- ––––––––––––––––––––––––––––––––––––––––– HTML SECTION ––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<!-- Tab links -->
+<div id="navbar">
+  <div class="tab" >
+    <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'Home')">Home</button>
+    <button class="tablinks" onclick="openTab(event, 'Tasks')">Tasks</button>
+    <button class="tablinks" onclick="openTab(event, 'Styles')">Styles</button>
+  </div>
+  <hr size="1" width="100%" color="#e5e5e5">  
+</div>
+
+<body>
+<!-- Tab content -->
+<div id="Home" class="tabcontent">
+  <h2>hi! &#128075 I'm figment, your new collaborative design partner. &#127912</h2>
+  <div class="spacer-smaller"></div>
+  <p>Tell me what you're designing... <input id="task" placeholder="a control panel for a spaceship"></p>
+  <button class="primary-button" id="homepage-button">start co-designing</button>
+</div>
+
+<div id="Tasks" class="tabcontent">
+
+  <button class="cardlink" onclick="openTab(event, 'Ideate')">
+    <div class="card" id="ideateCard">
+      <div class="container">
+        <h4><b>Ideate</b></h4>
+        <p>I'll build off of your ideas.</p>
+      </div>
+    </div>
+  </button>
+
+  <button class="cardlink" onclick="openTab(event, 'Moodboard')">
+    <div class="card" id="moodboardCard">
+      <div class="container">
+        <h4><b>Moodboard</b></h4>
+        <p>I'll generate visual references.</p>
+      </div>
+    </div>
+  </button>
+
+  <button class="cardlink" onclick="openTab(event, 'Paintbrush')">
+    <div class="card" id="paintbrushCard">
+      <div class="container">
+        <h4><b>Paintbrush</b></h4>
+        <p>I'll paint visual styles onto frames.</p>
+      </div>
+    </div>
+  </button>
+
+</div>
+
+<div id="Styles" class="tabcontent">
+  <h4>Data viz</h4>
+  <p><img class="style-preview" src="https://i.imgur.com/ecHqFZ2.png" alt="Data viz images"></p>
+  <button class="primary-button" id="generate">generate</button>
+  <div class="spacer"></div>
+  <hr size="1" width="100%" color="#e5e5e5">  
+  <div class="spacer-smaller"></div>
+  
+  <h4>Keith Haring</h4>
+  <p><img class="style-preview" src="https://i.imgur.com/Q874Irw.png" alt="Keith Haring images"></p>
+  <button class="primary-button" id="generate">generate</button>
+  <div class="spacer"></div>
+  <hr size="1" width="100%" color="#e5e5e5">  
+  <div class="spacer-smaller"></div>
+  
+  <h4>New Yorker</h4>
+  <p><img class="style-preview" src="https://i.imgur.com/IgIZEvI.png" alt="New Yorker magazine covers"></p>
+  <button class="primary-button" id="generate">generate</button>
+  <div class="spacer"></div>
+  <hr size="1" width="100%" color="#e5e5e5">  
+  <div class="spacer-smaller"></div>
+  
+  <h4>Orange Sky</h4>
+  <p><img class="style-preview" src="https://i.imgur.com/FJ9FSNP.png" alt="Orange skies"></p>
+  <button class="primary-button" id="generate">generate</button>
+  <div class="spacer"></div>
+  <hr size="1" width="100%" color="#e5e5e5">  
+  <div class="spacer-smaller"></div>
+  
+  <h4>Sneakers</h4>
+  <p><img class="style-preview" src="https://i.imgur.com/BH3NExb.png" alt="Sneakers"></p>
+  <button class="primary-button" id="generate">generate</button>
+  <div class="spacer"></div>
+  <hr size="1" width="100%" color="#e5e5e5">  
+  <div class="spacer-smaller"></div>
+</div>
+
+<div id="Ideate" class="tabcontent">
+  <h4>Ideate</h4>
+  <p>Select an object containing text to begin.</p>
+  <div class="spacer-smaller"></div>
+  <button class="primary-button" id="ideate-button" disabled>go!</button>
+</div>
+<div id="Moodboard" class="tabcontent">
+  <h4>Moodboard</h4>
+  <p>What do you want to see?</p>
+  <input id="task" placeholder="what serendipity looks like"></p>
+  <button class="primary-button" id="moodboard-button">go!</button>
+</div>
+<div id="Paintbrush" class="tabcontent">
+  <h4>Paintbrush</h4>
+  <p>Select the frame or image you want to use as the style and click "set style" to confirm </p>
+  <!-- <div class="input-container" id="paintbrush-input-container" style="visibility:hidden">
+    <p class="input-text" id="style-name"></p>
+  </div> -->
+  <button class="primary-button" id="set-style-button" disabled>set style</button>
+  <div id="paintbrush-target" style="visibility: hidden">
+    <div class="spacer"></div>
+    <p>Select the frame or image to apply the style to.</p>
+    <button class="primary-button" id="apply-style-button">Apply style</button>
+    <button class="secondary-button" id="start-over-button">Start over</button>
+  </div>
+  <div class = "spacer-smaller" id="last-element-paintbrush"></div>
+</div>
+
+</body>
+<!-- ––––––––––––––––––––––––––––––––––––––––– HTML SECTION ––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<!-- ––––––––––––––––––––––––––––––––––––––––– JAVASCRIPT SECTION ––––––––––––––––––––––––––––––––––––––––––––– -->
+<script>
+  // GLOBAL VARIABLES –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+  var style_set = false;
+  var style_selected = false;
+  var somethingSelected = false;
+  var inputCount = 0;
+
+  // FUNCTIONS –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+  function openTab(evt, tabName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+  // Get the element with id="defaultOpen" and click on it
+  document.getElementById("defaultOpen").click();
+
+  function removeInputs(){
+    var elements = document.getElementsByClassName("input-container");
+      for (var i = 0, length = elements.length; i < length; i++) {
+        elements[i].remove();
+      };
+  }
+  
+  function removeByID(){
+    for (var i=0; i <= inputCount; i++){
+      let toRemove = document.getElementById(i);
+      toRemove.remove();
+    }
+    inputCount = 0;
+  }
+
+  // MESSAGES ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+  window.onmessage = async (event) => {
+    if (event.data.pluginMessage.type === 'none-selected') {
+      somethingSelected = false;
+      style_selected = false;
+      document.getElementById("set-style-button").disabled = true;
+      document.getElementById("ideate-button").disabled = true;
+      removeInputs();
+      // removeByID();
+
+      // let ideate_element = document.getElementById("ideate-input-container");
+      // let paintbrush_element = document.getElementById("paintbrush-input-container");
+      // if (typeof(ideate_element) != 'undefined' && ideate_element != null){
+      //   ideate_element.remove();
+      // }
+      // if (typeof(paintbrush_element) != 'undefined' && paintbrush_element != null && style_set === false){
+      //   paintbrush_element.remove();
+      // }
+      // document.getElementById("ideate-input-container").style.visibility = "hidden";
+    }
+    if (event.data.pluginMessage.type === 'text-selected') {
+      somethingSelected = true;
+      document.getElementById("ideate-button").disabled = false;
+      const styleName = event.data.pluginMessage.selected_text;
+      // document.getElementById("style-name").innerHTML = styleName;
+      // document.getElementById("paintbrush-input-container").style = "visibility: visible";
+      let parentNode = document.getElementById("Ideate");
+      let refNode = document.getElementById("ideate-button");
+      const newDiv = document.createElement("div");
+      newDiv.className = "input-container";
+      newDiv.setAttribute("id",inputCount)
+      // newDiv.id = "ideate-input-container";
+      newDiv.style.visibility = "visible";
+      const newPara = document.createElement("p");
+      newPara.innerHTML = styleName;
+      newPara.className = "input-text";
+      newDiv.appendChild(newPara);
+      parentNode.insertBefore(newDiv,refNode);
+      inputCount++;
+      console.log("got this from the plugin code", event.data.pluginMessage);
+    }
+    if (event.data.pluginMessage.type === 'image-selected') {
+      somethingSelected = true;
+      const selected_image = event.data.pluginMessage.selected_image;
+      console.log("got this from the plugin code", selected_image);
+
+      if (style_set === false){
+        document.getElementById("set-style-button").disabled = false;
+        // if (style_selected === true){
+        //   removeInputs();
+        //   style_selected = false;
+        // }
+        let parentNode = document.getElementById("Paintbrush");
+        let refNode = document.getElementById("set-style-button");
+        const newDiv = document.createElement("div");
+        newDiv.className = "input-container";
+        newDiv.setAttribute("id",inputCount);
+        // newDiv.id = "paintbrush-input-container";
+        newDiv.style.visibility = "visible";
+        const newPara = document.createElement("p");
+        newPara.innerHTML = selected_image;
+        newPara.className = "input-text";
+        newDiv.appendChild(newPara);
+        parentNode.insertBefore(newDiv,refNode);
+        inputCount++;
+      }
+      else if (style_set === true){
+        document.getElementById("apply-style-button").disabled = false;
+        let parentNode = document.getElementById("paintbrush-target");
+        let refNode = document.getElementById("apply-style-button");
+        const newDiv = document.createElement("div");
+        newDiv.className = "input-container";
+        newDiv.id = "paintbrush-target-input-container";
+        newDiv.style.visibility = "visible";
+        const newPara = document.createElement("p");
+        newPara.innerHTML = selected_image;
+        newPara.className = "input-text";
+        newDiv.appendChild(newPara);
+        parentNode.insertBefore(newDiv,refNode);
+        document.getElementById("apply-style-button").scrollIntoView();
+      }
+    }
+  }
+
+  // OTHER ACTIONS ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+  document.getElementById('homepage-button').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'placeholder-frame'} }, '*')
+  }
+
+  document.getElementById('moodboard-button').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'placeholder-frame'} }, '*')
+  }
+
+  document.getElementById('generate').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'placeholder-frame'} }, '*')
+  }
+
+  document.getElementById('ideate-button').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'placeholder-text'} }, '*')
+    removeInputs();
+  }
+
+  document.getElementById('set-style-button').onclick = () => {
+    style_set = true;
+    document.getElementById("set-style-button").disabled = true;
+    document.getElementById("paintbrush-target").style = "visibility: visible";
+    parent.postMessage({ pluginMessage: { type: 'set-style'} }, '*')
+  }
+
+  document.getElementById("apply-style-button").onclick = () => {
+    document.getElementById("apply-style-button").disabled = true;
+    style_set = false;
+    style_selected = false;
+    document.getElementById("paintbrush-target").style = "visibility: hidden";
+    removeInputs();
+
+    // let paintbrush_element = document.getElementById("paintbrush-input-container");
+    // let paintbrush_target_element = document.getElementById("paintbrush-target-input-container");
+    // if (typeof(paintbrush_element) != 'undefined' && paintbrush_element != null){
+    //     if (somethingSelected === false){
+    //       paintbrush_element.remove();
+    //     }
+    //     else {
+    //       document.getElementById('set-style-button').disabled = false;
+    //     }
+    // }
+    // if (typeof(paintbrush_target_element) != 'undefined' && paintbrush_target_element != null){
+    //     paintbrush_target_element.remove();
+    // }
+    parent.postMessage({ pluginMessage: { type: 'placeholder-frame'} }, '*');
+  }
+
+  document.getElementById("start-over-button").onclick = () => {
+    style_set = false;
+    style_selected = false;
+    document.getElementById("paintbrush-target").style = "visibility: hidden";
+    // let paintbrush_element = document.getElementById("paintbrush-input-container");
+    // let paintbrush_target_element = document.getElementById("paintbrush-target-input-container");
+    // if (typeof(paintbrush_element) != 'undefined' && paintbrush_element != null){
+    //     if (somethingSelected === false){
+    //       paintbrush_element.remove();
+    //     }
+    //     else {
+    //       document.getElementById('set-style-button').disabled = false;
+    //     }
+    // }
+    // if (typeof(paintbrush_target_element) != 'undefined' && paintbrush_target_element != null){
+    //     paintbrush_target_element.remove();
+    // }
+    document.getElementById("Paintbrush").scrollIntoView();
+    removeInputs();
+  }
+
+  // When the user scrolls the page, execute myFunction
+  window.onscroll = function() {myFunction()};
+
+  // Get the navbar
+  var navbar = document.getElementById("navbar");
+
+  // Get the offset position of the navbar
+  var sticky = navbar.offsetTop;
+
+  // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+  // function myFunction() {
+  //   if (window.pageYOffset >= sticky) {
+  //     navbar.classList.add("sticky")
+  //   } else {
+  //     navbar.classList.remove("sticky");
+  //   }
+  // }
+</script>
+<!-- ––––––––––––––––––––––––––––––––––––––––– JAVASCRIPT SECTION ––––––––––––––––––––––––––––––––––––––––––––– -->
+
+<!--misc
+
+// document.getElementById('homepage-button').onclick = () => {
+//   const count = 1;
+//   parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
+// }
+
+// document.getElementById('ideate').onclick = () => {
+//   const textbox = document.getElementById('task');
+//   const count = parseInt(textbox.value, 10);
+//   parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
+// }
+
+// document.getElementById('cancel').onclick = () => {
+//   parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
+// }
+
+
+// let parentNode = document.getElementById("Paintbrush");
+// let refNode = document.getElementById("last-element-paintbrush");
+// const newDiv = document.createElement("div");
+// newDiv.id = "paintbrush-target";
+// const newSpacer = document.createElement("div");
+// newSpacer.className = "spacer";
+// const newPara = document.createElement("p");
+// newPara.innerHTML = "Select the frame or image to apply the style to";
+// const newButton = document.createElement("button");
+// newButton.className = "primary-button";
+// newButton.id = "apply-style-button";
+// newButton.innerHTML = "Apply";
+// newButton.disabled = true;
+// const newButton2 = document.createElement("button");
+// newButton2.className = "secondary-button";
+// newButton2.id = "stat-over-button";
+// newButton2.innerHTML = "Start over";
+// newDiv.appendChild(newSpacer);
+// newDiv.appendChild(newPara);
+// newDiv.appendChild(newButton);
+// newDiv.appendChild(newButton2);
+// parentNode.insertBefore(newDiv, refNode);
+-->
+
+</html>
+
+
+

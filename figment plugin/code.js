@@ -4,7 +4,7 @@
 // You can access browser APIs in the <script> tag inside "ui.html" which has a
 // full browser environment (see documentation).
 // This shows the HTML page in "ui.html".
-figma.showUI(__html__, { width: 300, height: 400 });
+figma.showUI(__html__, { width: 300, height: 450 });
 figma.on('selectionchange', () => {
     const selection = figma.currentPage.selection;
     if (selection.length === 0) {
@@ -79,6 +79,7 @@ figma.ui.onmessage = msg => {
         nodes.push(frame);
         figma.currentPage.selection = nodes;
         figma.viewport.scrollAndZoomIntoView(figma.currentPage.selection);
+        figma.currentPage.selection = [];
     }
     if (msg.type === 'placeholder-text') {
         if (figma.editorType === "figjam") {
@@ -92,8 +93,8 @@ figma.ui.onmessage = msg => {
             const newSelection = [];
             newSelection.push(txt);
             newSelection.push(stickynote);
-            figma.currentPage.selection = newSelection;
-            figma.viewport.scrollAndZoomIntoView(figma.currentPage.selection);
+            figma.viewport.scrollAndZoomIntoView(newSelection);
+            figma.currentPage.selection = [];
         }
         else {
             const nodes = [];
@@ -108,8 +109,8 @@ figma.ui.onmessage = msg => {
             frame.appendChild(txt);
             figma.currentPage.appendChild(frame);
             nodes.push(frame);
-            figma.currentPage.selection = nodes;
-            figma.viewport.scrollAndZoomIntoView(figma.currentPage.selection);
+            figma.viewport.scrollAndZoomIntoView(nodes);
+            figma.currentPage.selection = [];
         }
     }
     if (msg.type === 'set-style') {
